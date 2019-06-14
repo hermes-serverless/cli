@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.0",
+    "chalk": "^2.4.2",
     "commander": "^2.20.0",
     "configstore": "^4.0.0",
     "inquirer": "^6.3.1"
@@ -17,6 +18,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/chalk": "^2.2.0",
     "@types/commander": "^2.12.2",
     "@types/configstore": "^4.0.0",
     "@types/inquirer": "^6.0.3",
