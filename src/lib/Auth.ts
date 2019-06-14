@@ -1,41 +1,48 @@
+import { UsernameExistenceObj } from './../typings.d'
 import axios, { AxiosInstance } from 'axios'
 import { Store } from '../store'
-import { UserForAuth, User } from '../typings'
+import { UserForAuth, User, AuthObj } from '../typings'
 
 export class Auth {
   private static client: AxiosInstance = axios.create({
-    baseURL: Store.getBaseUrl(),
+    baseURL: Store.getBaseUrl() + '/auth',
   })
 
-  public static async register(newUser: UserForAuth): Promise<User> {
+  public static async register(newUser: UserForAuth): Promise<AuthObj> {
     try {
       const clientRes = await this.client.post('/register', newUser)
       return clientRes.data
     } catch (err) {
-      console.log(err)
-      process.exit(1)
+      throw err
     }
   }
 
-  public static async login(loginData: UserForAuth): Promise<User> {
+  public static async login(loginData: UserForAuth): Promise<AuthObj> {
     try {
       const clientRes = await this.client.post('/login', loginData)
       return clientRes.data
     } catch (err) {
-      console.log(err)
-      process.exit(1)
+      throw err
     }
   }
 
-  public static async getMe(auth: string): Promise<User> {
+  public static async usernameExists(username: string): Promise<UsernameExistenceObj> {
+    try {
+      const clientRes = await this.client.post(`/register/${username}`)
+      return clientRes.data
+    } catch (err) {
+      throw err
+    }
+  }
+
+  public static async getMe(token: string): Promise<User> {
     try {
       const clientRes = await this.client.get('/me', {
-        headers: { Authorization: auth },
+        headers: { Authorization: 'Bearer ' + token },
       })
       return clientRes.data
     } catch (err) {
-      console.log(err)
-      process.exit(1)
+      throw err
     }
   }
 }
