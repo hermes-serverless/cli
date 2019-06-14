@@ -4,6 +4,7 @@ import { registerCommand } from './register'
 import { meCommand } from './me'
 import { logoutCommand } from './logout'
 import { CommanderStatic } from 'commander'
+import { initCommand } from './init'
 
 export interface CommandsObject {
   [command: string]: any
@@ -20,6 +21,7 @@ const commandsToCreate: CommandProto[] = [
   { name: 'login', creator: loginCommand },
   { name: 'logout', creator: logoutCommand },
   { name: 'me', creator: meCommand },
+  { name: 'init', creator: initCommand },
 ]
 
 export const commandLoader = (program: CommanderStatic) => {
