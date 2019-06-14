@@ -1,5 +1,5 @@
-import { Store } from './../store/index'
-import { Auth } from './../lib/Auth'
+import { Store } from '../store/index'
+import { AuthDatasource } from '../lib/datasources/Auth'
 import inquirer from 'inquirer'
 import { CommanderStatic } from 'commander'
 
@@ -16,7 +16,7 @@ const usernameValidation = async (username: string) => {
   if (!username) return "Username can't be empty"
   if (!/^[a-zA-Z0-9]*$/i.test(username)) return 'Use only letters and numbers'
 
-  const { exists } = await Auth.usernameExists(username)
+  const { exists } = await AuthDatasource.usernameExists(username)
   if (exists) return 'Username already exists'
   return true
 }
@@ -60,7 +60,7 @@ export const registerCommand = (program: CommanderStatic) => {
     const { username } = ans
 
     try {
-      const authObj = await Auth.register({
+      const authObj = await AuthDatasource.register({
         username,
         password,
       })

@@ -1,5 +1,5 @@
-import { Store } from './../store/index'
-import { Auth } from './../lib/Auth'
+import { Store } from '../store/index'
+import { AuthDatasource } from '../lib/datasources/Auth'
 import fs from 'fs'
 import inquirer from 'inquirer'
 import { CommanderStatic } from 'commander'
@@ -39,7 +39,7 @@ export const loginCommand = (program: CommanderStatic) => {
       }
 
       try {
-        const authObj = await Auth.login({
+        const authObj = await AuthDatasource.login({
           username,
           password,
         })

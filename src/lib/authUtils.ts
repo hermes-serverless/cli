@@ -1,4 +1,4 @@
-import { Auth } from './Auth'
+import { AuthDatasource } from './datasources/Auth'
 import { Store } from '../store'
 
 export const isLogged = async () => {
@@ -9,7 +9,7 @@ export const isLogged = async () => {
     }
 
   try {
-    const { username } = await Auth.getMe(Store.getToken())
+    const { username } = await AuthDatasource.getMe(Store.getToken())
     return {
       state: 'Logged',
       username,
@@ -20,5 +20,11 @@ export const isLogged = async () => {
       state: 'TokenExpired',
       username: null,
     }
+  }
+}
+
+export const getAuthorizationHeader = (token: string) => {
+  return {
+    Authorization: 'Bearer ' + token,
   }
 }
