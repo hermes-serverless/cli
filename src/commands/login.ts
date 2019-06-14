@@ -1,3 +1,5 @@
+import { Store } from './../store/index'
+import { Auth } from './../lib/Auth'
 import fs from 'fs'
 import inquirer from 'inquirer'
 import { CommanderStatic } from 'commander'
@@ -36,6 +38,18 @@ export const loginCommand = (program: CommanderStatic) => {
         }
       }
 
-      console.log(username, password)
+      try {
+        const authObj = await Auth.login({
+          username,
+          password,
+        })
+
+        console.log(authObj)
+        if (authObj.auth) Store.addToken(authObj.token)
+      } catch (err) {
+        if (err.response && err.response.data) console.log(err.response.data)
+        else console.log(err)
+        process.exit(1)
+      }
     })
 }
