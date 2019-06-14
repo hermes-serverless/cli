@@ -1,9 +1,9 @@
-import { UsernameExistenceObj } from './../typings.d'
 import axios, { AxiosInstance } from 'axios'
-import { Store } from '../store'
-import { UserForAuth, User, AuthObj } from '../typings'
+import { Store } from '../../store'
+import { UserForAuth, User, AuthObj, UsernameExistenceObj } from '../../typings'
+import { getAuthorizationHeader } from '../authUtils'
 
-export class Auth {
+export class AuthDatasource {
   private static client: AxiosInstance = axios.create({
     baseURL: Store.getBaseUrl() + '/auth',
   })
@@ -38,7 +38,7 @@ export class Auth {
   public static async getMe(token: string): Promise<User> {
     try {
       const clientRes = await this.client.get('/me', {
-        headers: { Authorization: 'Bearer ' + token },
+        headers: getAuthorizationHeader(token),
       })
       return clientRes.data
     } catch (err) {
