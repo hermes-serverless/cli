@@ -1,5 +1,8 @@
 import { CommanderStatic } from 'commander'
 import { loginCommand } from './login'
+import { registerCommand } from './register'
+import { meCommand } from './me'
+import { logoutCommand } from './logout'
 
 export interface CommandsObject {
   [command: string]: any
@@ -11,10 +14,10 @@ interface CommandProto {
 }
 
 const commandsToCreate: CommandProto[] = [
-  {
-    name: 'login',
-    creator: loginCommand,
-  },
+  { name: 'register', creator: registerCommand },
+  { name: 'login', creator: loginCommand },
+  { name: 'logout', creator: logoutCommand },
+  { name: 'me', creator: meCommand },
 ]
 
 export const commandLoader = (program: CommanderStatic) => {
