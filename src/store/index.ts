@@ -1,12 +1,12 @@
 import ConfigStore from 'configstore'
 import { name as appName } from '../../package.json'
-import { User } from '../typings'
 
 export class Store {
   private static store = new ConfigStore(appName, {
     hermesEndpointUrl: 'localhost',
     hermesEndpointPort: 3000,
     token: '',
+    dockerBin: '/usr/bin/docker',
   })
 
   public static getBaseUrl(protocol?: string) {
@@ -24,5 +24,13 @@ export class Store {
 
   public static getToken() {
     return this.store.get('token')
+  }
+
+  public static getDockerPath() {
+    return this.store.get('dockerBin')
+  }
+
+  public static setDockerPath(path: string) {
+    this.store.set('dockerBin', path)
   }
 }
