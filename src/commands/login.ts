@@ -1,16 +1,12 @@
-import { Store } from '../store/index'
-import { AuthDatasource } from '../lib/datasources/Auth'
+import { CommanderStatic } from 'commander'
 import fs from 'fs'
 import inquirer from 'inquirer'
-import { CommanderStatic } from 'commander'
+import { AuthDatasource } from '../lib/datasources/Auth'
+import { notEmpty } from '../lib/utils/inquirerValidations'
+import { Store } from '../store/index'
 
 interface PasswordPromptAns {
   password: string
-}
-
-const notEmpty = (str: string) => {
-  if (!str) return "Password can't be empty"
-  return true
 }
 
 export const loginCommand = (program: CommanderStatic) => {
@@ -25,7 +21,7 @@ export const loginCommand = (program: CommanderStatic) => {
             type: 'password',
             message: 'Password? ',
             name: 'password',
-            validate: notEmpty,
+            validate: notEmpty("Password can't be empty"),
           },
         ])
         password = ans.password
