@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios'
 import { Store } from '../../store'
-import { UserForAuth, User, AuthObj } from '../../typings'
-import { getAuthorizationHeader } from '../authUtils'
+import { User } from '../../typings'
+import { getAuthorizationHeader } from '../utils/authUtils'
 
 export interface UpdatedUser {
   updatedUser: User

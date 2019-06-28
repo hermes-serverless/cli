@@ -1,4 +1,4 @@
-import { isLogged } from './../lib/authUtils'
+import { isLogged } from './../lib/utils/authUtils'
 import { CommanderStatic } from 'commander'
 import chalk from 'chalk'
 

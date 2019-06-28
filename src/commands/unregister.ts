@@ -1,5 +1,5 @@
 import { UserDatasource } from './../lib/datasources/User'
-import { isLogged } from './../lib/authUtils'
+import { isLogged } from './../lib/utils/authUtils'
 import { Store } from '../store/index'
 import { AuthDatasource } from '../lib/datasources/Auth'
 import { CommanderStatic } from 'commander'
