@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import program from 'commander'
 import projectPackage from '../package.json'
 import { commandLoader } from './commands'
