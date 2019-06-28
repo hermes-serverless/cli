@@ -1,10 +1,11 @@
-import inquirer from 'inquirer'
+import chalk from 'chalk'
 import { CommanderStatic } from 'commander'
 import fs from 'fs'
+import inquirer from 'inquirer'
 import path from 'path'
 
 const getLanguageOptions = () => {
-  return ['cuda']
+  return ['cuda', 'cpp']
 }
 
 const validateFunctionName = (fName: string) => {
@@ -14,7 +15,7 @@ const validateFunctionName = (fName: string) => {
 }
 
 export const initCommand = (program: CommanderStatic) => {
-  program.command('init').action(async cmd => {
+  program.command('init [path]').action(async (folderPath, cmd) => {
     const { functionName, language, gpuCapable } = await inquirer.prompt([
       {
         type: 'input',
@@ -42,15 +43,17 @@ export const initCommand = (program: CommanderStatic) => {
         gpuCapable,
         scope: 'public',
         functionVersion: '1.0.0',
+        handler: './a.out',
       },
       null,
       '\t'
     )
 
-    const dir = path.join(process.cwd(), functionName)
-    console.log(dir)
+    console.log(folderPath)
+    const dir = path.join(process.cwd(), folderPath || '.', functionName)
+    console.log(chalk.bold(`-> Function created at ${dir}`))
     if (fs.existsSync(dir)) throw new Error(`Function directory ${functionName} already exists`)
     fs.mkdirSync(dir)
-    fs.writeFileSync(path.join(dir, 'hermes_config.json'), json, { encoding: 'utf-8' })
+    fs.writeFileSync(path.join(dir, 'hermes.config.json'), json, { encoding: 'utf-8' })
   })
 }
