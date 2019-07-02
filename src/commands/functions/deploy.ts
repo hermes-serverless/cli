@@ -8,6 +8,6 @@ export const deployCommand = (program: CommanderStatic) => {
     .action(async (dir, cmd) => {
       const fnDir = dir ? dir : process.cwd()
       const pusher = new Pusher(fnDir)
-      await pusher.addToHermes(cmd.update != null)
+      await pusher.addToHermes(cmd.update != null, 'production')
     })
 }
