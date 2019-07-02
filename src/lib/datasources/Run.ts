@@ -128,4 +128,18 @@ export class RunDatasource {
       throw err
     }
   }
+
+  static async getRunStatus(username: string, runID: string, token: string): Promise<any> {
+    try {
+      const res = await this.client.get(`${username}/run/${runID}/status`, {
+        headers: {
+          ...getAuthorizationHeader(token),
+        },
+        responseType: 'stream',
+      })
+      return res.data
+    } catch (err) {
+      throw err
+    }
+  }
 }
