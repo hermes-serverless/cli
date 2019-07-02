@@ -14,6 +14,7 @@ import { deleteCommand } from './functions/delete'
 import { runCommand } from './run/run'
 import { functionRunListCommand } from './run/function-runs'
 import { runListCommand } from './run/runs'
+import { runStatusCommand } from './run/run-status'
 
 export interface CommandsObject {
   [command: string]: any
@@ -25,21 +26,24 @@ interface CommandProto {
 }
 
 const commandsToCreate: CommandProto[] = [
-  { name: 'build', creator: functionBuildCommand },
-  { name: 'config', creator: configCommand },
-  { name: 'delete', creator: deleteCommand },
-  { name: 'deploy', creator: deployCommand },
-  { name: 'function-runs', creator: functionRunListCommand },
-  { name: 'info', creator: infoCommand },
-  { name: 'init', creator: initCommand },
-  { name: 'list', creator: listCommand },
+  { name: 'register', creator: registerCommand },
+  { name: 'unregister', creator: unregisterCommand },
   { name: 'login', creator: loginCommand },
   { name: 'logout', creator: logoutCommand },
   { name: 'me', creator: meCommand },
-  { name: 'register', creator: registerCommand },
+  { name: 'config', creator: configCommand },
+
+  { name: 'init', creator: initCommand },
+  { name: 'build', creator: functionBuildCommand },
+  { name: 'deploy', creator: deployCommand },
+  { name: 'delete', creator: deleteCommand },
+  { name: 'info', creator: infoCommand },
+  { name: 'list', creator: listCommand },
+
   { name: 'run', creator: runCommand },
+  { name: 'function-runs', creator: functionRunListCommand },
   { name: 'runs', creator: runListCommand },
-  { name: 'unregister', creator: unregisterCommand },
+  { name: 'run-status', creator: runStatusCommand },
 ]
 
 export const commandLoader = (program: CommanderStatic) => {
