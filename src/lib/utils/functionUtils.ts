@@ -22,9 +22,9 @@ export const parseHermesConfig = (dir: string): HermesFunctionProto => {
   const fields = ['functionName', 'functionVersion', 'gpuCapable', 'language', 'scope', 'handler']
   const err: any[] = []
   fields.forEach((field: string) => {
-    // @ts-ignore
-    if (hermesConf[field] == null)
+    if (hermesConf[field as keyof typeof hermesConf] == null) {
       err.push(chalk.bold.red(`Missing field ${field} on hermes.config.json`))
+    }
   })
 
   if (err.length !== 0) {
@@ -98,9 +98,8 @@ export const printFnTable = (fnArr: HermesFunction[], header?: FunctionTableHead
   )
 
   const sortedFnArr = fnArr.sort((a, b) => {
-    if (a.functionName === b.functionName) {
-      return a.functionVersion < b.functionVersion ? -1 : 1
-    } else return a.functionName < b.functionName ? -1 : 1
+    if (a.functionName === b.functionName) return a.functionVersion < b.functionVersion ? -1 : 1
+    return a.functionName < b.functionName ? -1 : 1
   })
 
   sortedFnArr.forEach(fn => {

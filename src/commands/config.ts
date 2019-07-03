@@ -1,8 +1,8 @@
-import { configDockerhubUsername, configHermesURL } from './../lib/utils/configUtils'
-import { CommanderStatic } from 'commander'
-import { Store } from '../store'
 import chalk from 'chalk'
+import { CommanderStatic } from 'commander'
 import R from 'ramda'
+import { Store } from '../store'
+import { configDockerhubUsername, configHermesURL } from './../lib/utils/configUtils'
 
 interface Configs {
   [key: string]: {

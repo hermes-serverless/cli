@@ -1,7 +1,7 @@
-import { Store } from '../store/index'
-import { AuthDatasource } from '../lib/datasources/Auth'
-import inquirer from 'inquirer'
 import { CommanderStatic } from 'commander'
+import inquirer from 'inquirer'
+import { AuthDatasource } from '../lib/datasources/Auth'
+import { Store } from '../store/index'
 
 interface UsernamePromptAns {
   username: string
@@ -38,7 +38,7 @@ export const registerCommand = (program: CommanderStatic) => {
 
     let passwordMatch = false
     let password = ''
-    while (passwordMatch == false) {
+    while (!passwordMatch) {
       const passwordAns: PasswordPromptAns = await inquirer.prompt([
         {
           type: 'password',

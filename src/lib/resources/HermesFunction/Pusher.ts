@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios'
 import chalk from 'chalk'
 import { Store } from '../../../store'
 import { printFnTable, runDockerProcess } from '../../utils/functionUtils'
@@ -5,7 +6,6 @@ import { HermesFunctionDatasource } from './../../datasources/HermesFunction'
 import { Subprocess } from './../Subprocess'
 import { Builder } from './Builder'
 import { DataProvider } from './DataProvider'
-import { AxiosError } from 'axios'
 
 export class Pusher {
   private builder: Builder

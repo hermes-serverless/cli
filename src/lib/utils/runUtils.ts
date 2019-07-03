@@ -1,7 +1,7 @@
 import chalk from 'chalk'
+import moment from 'moment'
 import { table } from 'table'
 import { CompleteRunInfo } from './../../typings.d'
-import moment from 'moment'
 import { timeDiff } from './time'
 
 interface RunTableHeader {
@@ -36,12 +36,12 @@ export const printRunTable = (runArr: CompleteRunInfo[], header?: RunTableHeader
   const runsSorted = runs.sort((a, b) => {
     if (!a.endTime) {
       if (!b.endTime) return a.startTime.isBefore(b.startTime) ? 1 : -1
-      else return -1
-    } else {
-      if (!b.endTime) return 1
-      if (a.endTime.isSame(b.endTime)) return a.startTime.isBefore(a.endTime) ? -1 : 1
-      else return a.endTime.isBefore(b.endTime) ? -1 : 1
+      return -1
     }
+
+    if (!b.endTime) return 1
+    if (a.endTime.isSame(b.endTime)) return a.startTime.isBefore(a.endTime) ? -1 : 1
+    return a.endTime.isBefore(b.endTime) ? -1 : 1
   })
 
   const resultHeader = {

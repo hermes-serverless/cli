@@ -1,19 +1,20 @@
-import { AuthDatasource } from './../datasources/Auth'
-import { Store } from '../../store'
 import chalk from 'chalk'
+import { Store } from '../../store'
+import { AuthDatasource } from './../datasources/Auth'
 
 export const isLogged = async () => {
-  if (!Store.getToken())
+  if (!Store.getToken()) {
     return {
       state: 'NotLogged',
       username: null,
     }
+  }
 
   try {
     const { username } = await AuthDatasource.getMe(Store.getToken())
     return {
-      state: 'Logged',
       username,
+      state: 'Logged',
     }
   } catch (err) {
     if (err.response && err.response.data) console.log(err.response.data)

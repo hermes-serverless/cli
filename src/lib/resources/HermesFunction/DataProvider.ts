@@ -1,9 +1,9 @@
+import { FunctionID } from '../../datasources/HermesFunction'
 import { guaranteeLogged } from '../../utils/authUtils'
 import { Waiter } from '../../utils/CustomPromises'
 import { getDockerhubUsername, parseHermesConfig } from '../../utils/functionUtils'
 import { HermesFunction, HermesFunctionProto } from './../../../typings.d'
 import { ImageNamer } from './ImageNamer'
-import { FunctionID } from '../../datasources/HermesFunction'
 
 export class DataProvider {
   private functionDir: string

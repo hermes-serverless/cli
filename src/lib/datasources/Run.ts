@@ -1,10 +1,10 @@
-import { Readable } from 'stream'
-import { PartialFunctionID, FunctionID } from './HermesFunction'
 import axios, { AxiosInstance } from 'axios'
-import { Store } from '../../store'
-import { User, CompleteRunInfo } from '../../typings'
-import { getAuthorizationHeader } from '../utils/authUtils'
 import FormData from 'form-data'
+import { Readable } from 'stream'
+import { Store } from '../../store'
+import { CompleteRunInfo, User } from '../../typings'
+import { getAuthorizationHeader } from '../utils/authUtils'
+import { FunctionID, PartialFunctionID } from './HermesFunction'
 
 interface BaseObj {
   user: User

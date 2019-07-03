@@ -1,11 +1,11 @@
 import axios from 'axios'
 import chalk from 'chalk'
+import { runDockerProcess } from '../../utils/functionUtils'
 import { Store } from './../../../store'
 import { BuiltFunction, BuiltWatcher } from './../../../typings.d'
 import { StringStream } from './../StringStream'
 import { Subprocess } from './../Subprocess'
 import { DataProvider } from './DataProvider'
-import { runDockerProcess } from '../../utils/functionUtils'
 
 const getDockerfileURL = (language: string) => {
   return `https://raw.githubusercontent.com/hermes-tcc/project-building-base-images/master/${language}.Dockerfile`

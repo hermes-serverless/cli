@@ -1,8 +1,8 @@
-import { printRunTable } from './../../lib/utils/runUtils'
 import { CommanderStatic } from 'commander'
+import { RunDatasource } from '../../lib/datasources/Run'
 import { guaranteeLogged } from '../../lib/utils/authUtils'
 import { Store } from '../../store'
-import { RunDatasource } from '../../lib/datasources/Run'
+import { printRunTable } from './../../lib/utils/runUtils'
 
 export const functionRunListCommand = (program: CommanderStatic) => {
   program
