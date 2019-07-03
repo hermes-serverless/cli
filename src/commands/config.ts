@@ -1,28 +1,47 @@
-import { configDockerhubUsername } from './../lib/utils/configUtils'
+import { configDockerhubUsername, configHermesURL } from './../lib/utils/configUtils'
 import { CommanderStatic } from 'commander'
-import inquirer from 'inquirer'
+import { Store } from '../store'
+import chalk from 'chalk'
+import R from 'ramda'
 
-const configs = ['docker.username']
+interface Configs {
+  [key: string]: {
+    get: () => string
+    set: (newValue: string) => Promise<string>
+  }
+}
 
-interface ConfigOptionPrompt {
-  option: string
+const configs: Configs = {
+  'docker.username': {
+    get: Store.getDockerhubUsername,
+    set: configDockerhubUsername,
+  },
+  'hermes.url': {
+    get: Store.getBaseUrl,
+    set: configHermesURL,
+  },
+}
+
+const printConfigs = (obj: Configs) => {
+  R.forEachObjIndexed((val, key: string) => {
+    console.log(`${chalk.bold(key)}: ${chalk.bold.blue(val.get())}`)
+  }, obj)
 }
 
 export const configCommand = (program: CommanderStatic) => {
-  program.command('config [option] [val]').action(async (option, val, cmd) => {
-    let configToChange = option
-    if (!configToChange || !(configToChange in configs)) {
-      const { option: selected } = (await inquirer.prompt([
-        {
-          type: 'list',
-          message: 'Choose the configuration you want to change:',
-          name: 'option',
-          choices: configs,
-        },
-      ])) as ConfigOptionPrompt
-      configToChange = selected
-    }
+  program.command('config [property] [newValue]').action(async (property, newValue, cmd) => {
+    if (property != null) {
+      configs['docker.username']
+      if (configs[property as keyof typeof configs] == null) {
+        console.log(chalk.bold.red('Invalid property'))
+        process.exit(1)
+      }
 
-    if (configToChange === 'docker.username') return await configDockerhubUsername(val)
+      if (newValue != null) {
+        configs[property as keyof typeof configs].set(newValue)
+      }
+
+      printConfigs({ [property]: configs[property as keyof typeof configs] })
+    } else printConfigs(configs)
   })
 }
