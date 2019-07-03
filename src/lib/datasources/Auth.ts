@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios'
 import { Store } from '../../store'
-import { UserForAuth, User, AuthObj, UsernameExistenceObj } from '../../typings'
+import { AuthObj, User, UserForAuth, UsernameExistenceObj } from '../../typings'
 import { getAuthorizationHeader } from '../utils/authUtils'
 
 export class AuthDatasource {

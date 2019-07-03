@@ -1,9 +1,9 @@
-import { printFnTable } from './../../lib/utils/functionUtils'
-import { HermesFunctionDatasource } from './../../lib/datasources/HermesFunction'
+import { AxiosError } from 'axios'
 import { CommanderStatic } from 'commander'
 import { isLogged } from '../../lib/utils/authUtils'
 import { Store } from '../../store'
-import { AxiosError } from 'axios'
+import { HermesFunctionDatasource } from './../../lib/datasources/HermesFunction'
+import { printFnTable } from './../../lib/utils/functionUtils'
 
 export const infoCommand = (program: CommanderStatic) => {
   program

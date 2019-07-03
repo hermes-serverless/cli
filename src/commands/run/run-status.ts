@@ -1,10 +1,9 @@
-import { AxiosError } from 'axios'
 import { CommanderStatic } from 'commander'
+import { Readable } from 'stream'
 import { RunDatasource } from '../../lib/datasources/Run'
 import { guaranteeLogged } from '../../lib/utils/authUtils'
-import { Store } from '../../store'
-import { Readable } from 'stream'
 import { Waiter } from '../../lib/utils/CustomPromises'
+import { Store } from '../../store'
 
 export const runStatusCommand = (program: CommanderStatic) => {
   program.command('run-status <runID>').action(async (runID, cmd) => {

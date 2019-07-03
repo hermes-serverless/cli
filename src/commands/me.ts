@@ -1,6 +1,6 @@
-import { isLogged } from './../lib/utils/authUtils'
-import { CommanderStatic } from 'commander'
 import chalk from 'chalk'
+import { CommanderStatic } from 'commander'
+import { isLogged } from './../lib/utils/authUtils'
 
 export const meCommand = (program: CommanderStatic) => {
   program.command('me').action(async cmd => {

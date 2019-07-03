@@ -1,7 +1,7 @@
-import { Store } from './../store/index'
-import { CommanderStatic } from 'commander'
 import chalk from 'chalk'
+import { CommanderStatic } from 'commander'
 import { isLogged } from '../lib/utils/authUtils'
+import { Store } from './../store/index'
 
 export const logoutCommand = (program: CommanderStatic) => {
   program.command('logout').action(async cmd => {

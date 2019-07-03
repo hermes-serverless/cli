@@ -1,10 +1,10 @@
-import { UserDatasource } from './../lib/datasources/User'
-import { isLogged } from './../lib/utils/authUtils'
-import { Store } from '../store/index'
-import { AuthDatasource } from '../lib/datasources/Auth'
+import chalk from 'chalk'
 import { CommanderStatic } from 'commander'
 import inquirer from 'inquirer'
-import chalk from 'chalk'
+import { AuthDatasource } from '../lib/datasources/Auth'
+import { Store } from '../store/index'
+import { UserDatasource } from './../lib/datasources/User'
+import { isLogged } from './../lib/utils/authUtils'
 
 export const unregisterCommand = (program: CommanderStatic) => {
   program.command('unregister').action(async cmd => {
