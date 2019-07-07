@@ -29,7 +29,8 @@ export const configHermesURL = async (url: string) => {
     return true
   }
 
-  const msg = validate(url)
-  if (msg === true) return Store.setHermesURL(url)
+  const urlWithoutLastSlash = url.charAt(url.length - 1) === '/' ? url.slice(0, -1) : url
+  const msg = validate(urlWithoutLastSlash)
+  if (msg === true) return Store.setHermesURL(urlWithoutLastSlash)
   console.log(chalk.bold.red(`${msg}`))
 }
