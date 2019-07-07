@@ -11,6 +11,10 @@ export const runStatusCommand = (program: CommanderStatic) => {
     try {
       const statusStream = await RunDatasource.getRunStatus(username, runID, Store.getToken())
       statusStream.pipe(process.stdout)
+
+      statusStream.on('close', () => {
+        console.log('')
+      })
     } catch (err) {
       const done = new Waiter()
       ;(err.response.data as Readable).on('close', () => {
