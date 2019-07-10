@@ -3,7 +3,7 @@ import chalk from 'chalk'
 import program from 'commander'
 import { commandLoader } from './commands'
 
-program.version('0.0.1')
+program.version('0.0.2')
 const commands = commandLoader(program)
 
 program.on('command:*', () => {
