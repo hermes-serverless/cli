@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 import chalk from 'chalk'
 import program from 'commander'
-import projectPackage from '../package.json'
 import { commandLoader } from './commands'
 
-program.version(projectPackage.version)
+program.version('0.0.1')
 const commands = commandLoader(program)
 
 program.on('command:*', () => {

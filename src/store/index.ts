@@ -1,8 +1,7 @@
 import ConfigStore from 'configstore'
-import { name as appName } from '../../package.json'
 
 export class Store {
-  private static store = new ConfigStore(appName, {
+  private static store = new ConfigStore('@hermes-serverless/cli', {
     hermesEndpointUrl: '',
     token: '',
     dockerBin: '/usr/bin/docker',
