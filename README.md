@@ -1,4 +1,4 @@
-# Hermes/CLI [![npm version](https://badge.fury.io/js/hermes-cli.svg)](//npmjs.com/package/hermes-cli) [![GitHub Issues](https://img.shields.io/github/issues/hermes-tcc/cli.svg)](https://github.com/hermes-tcc/cli/issues) [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/hermes-tcc/cli.svg)](https://github.com/hermes-tcc/cli/pulls)
+# Hermes/CLI [![npm version](https://badge.fury.io/js/%40hermes-serverless%2Fcli.svg)](https://badge.fury.io/js/%40hermes-serverless%2Fcli) [![GitHub Issues](https://img.shields.io/github/issues/hermes-serverless/cli.svg)](https://github.com/hermes-serverless/cli/issues) [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/hermes-serverless/cli.svg)](https://github.com/hermes-serverless/cli/pulls)
 
 ## About <a name = "about"></a>
 
