@@ -1,8 +1,8 @@
+import { RunDatasource } from '@hermes-serverless/cli-resources'
 import chalk from 'chalk'
 import { CommanderStatic } from 'commander'
 import fs from 'fs'
 import inquirer from 'inquirer'
-import { RunDatasource } from '../../lib/datasources/Run'
 import { guaranteeLogged } from '../../lib/utils/authUtils'
 import { Store } from '../../store'
 import { Waiter } from './../../lib/utils/CustomPromises'
@@ -11,6 +11,7 @@ export const runCommand = (program: CommanderStatic) => {
   program
     .command('run <functionOwner/fName:fVersion>')
     .option('-f, --file <filePath>', 'Specify a input file')
+    .option('-s, --sync', 'Sync run')
     .action(async (functionInfo, cmd) => {
       const username = await guaranteeLogged()
       const [functionOwner, encodedFName] = functionInfo.split('/')
@@ -57,12 +58,12 @@ export const runCommand = (program: CommanderStatic) => {
         functionVersion,
       }
 
-      const ret = await RunDatasource.createFunctionRun(
-        username,
-        functionID,
-        input,
-        Store.getToken()
-      )
+      let ret
+      if (program.sync) {
+        ret = await RunDatasource.createSyncRun(username, functionID, input, Store.getToken())
+      } else {
+        ret = await RunDatasource.createAsyncRun(username, functionID, input, Store.getToken())
+      }
 
       console.log(ret)
     })

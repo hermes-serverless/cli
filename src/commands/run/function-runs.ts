@@ -1,5 +1,5 @@
+import { RunDatasource } from '@hermes-serverless/cli-resources'
 import { CommanderStatic } from 'commander'
-import { RunDatasource } from '../../lib/datasources/Run'
 import { guaranteeLogged } from '../../lib/utils/authUtils'
 import { Store } from '../../store'
 import { printRunTable } from './../../lib/utils/runUtils'
