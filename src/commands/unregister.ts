@@ -1,9 +1,8 @@
+import { AuthDatasource, UserDatasource } from '@hermes-serverless/cli-resources'
 import chalk from 'chalk'
 import { CommanderStatic } from 'commander'
 import inquirer from 'inquirer'
-import { AuthDatasource } from '../lib/datasources/Auth'
 import { Store } from '../store/index'
-import { UserDatasource } from './../lib/datasources/User'
 import { isLogged } from './../lib/utils/authUtils'
 
 export const unregisterCommand = (program: CommanderStatic) => {

@@ -1,6 +1,6 @@
+import { AuthDatasource } from '@hermes-serverless/cli-resources'
 import { CommanderStatic } from 'commander'
 import inquirer from 'inquirer'
-import { AuthDatasource } from '../lib/datasources/Auth'
 import { Store } from '../store/index'
 
 interface UsernamePromptAns {

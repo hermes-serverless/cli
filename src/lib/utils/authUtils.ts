@@ -1,6 +1,6 @@
+import { AuthDatasource } from '@hermes-serverless/cli-resources'
 import chalk from 'chalk'
 import { Store } from '../../store'
-import { AuthDatasource } from './../datasources/Auth'
 
 export const isLogged = async () => {
   if (!Store.getToken()) {

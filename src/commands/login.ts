@@ -1,7 +1,7 @@
+import { AuthDatasource } from '@hermes-serverless/cli-resources'
 import { CommanderStatic } from 'commander'
 import fs from 'fs'
 import inquirer from 'inquirer'
-import { AuthDatasource } from '../lib/datasources/Auth'
 import { notEmpty } from '../lib/utils/inquirerValidations'
 import { Store } from '../store/index'
 
