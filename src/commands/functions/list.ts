@@ -1,7 +1,7 @@
+import { HermesFunctionDatasource } from '@hermes-serverless/cli-resources'
 import { CommanderStatic } from 'commander'
 import { guaranteeLogged } from '../../lib/utils/authUtils'
 import { Store } from '../../store'
-import { HermesFunctionDatasource } from './../../lib/datasources/HermesFunction'
 import { printFnTable } from './../../lib/utils/functionUtils'
 
 export const listCommand = (program: CommanderStatic) => {
@@ -12,6 +12,7 @@ export const listCommand = (program: CommanderStatic) => {
       {},
       Store.getToken()
     )
+    // @ts-ignore
     printFnTable(fnArr)
   })
 }

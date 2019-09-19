@@ -1,11 +1,9 @@
 import chalk from 'chalk'
 import fs from 'fs'
 import path from 'path'
-import { Readable } from 'stream'
 import { table } from 'table'
 import { Store } from './../../store'
 import { HermesFunction, HermesFunctionProto } from './../../typings.d'
-import { Subprocess } from './../resources/Subprocess'
 import { configDockerhubUsername } from './configUtils'
 
 export const parseHermesConfig = (dir: string): HermesFunctionProto => {
@@ -114,23 +112,4 @@ export const printFnTable = (fnArr: HermesFunction[], header?: FunctionTableHead
   })
 
   console.log(table(tableData))
-}
-
-interface RunDockerProcessArgs {
-  docker: Subprocess
-  input?: Readable
-  errorMessage?: string
-}
-
-export const runDockerProcess = async ({ docker, input, errorMessage }: RunDockerProcessArgs) => {
-  docker.start({
-    out: process.stdout,
-    err: process.stderr,
-    ...(input ? { in: input } : {}),
-  })
-  await docker.finish()
-  if (docker.exitCode() !== 0) {
-    if (errorMessage) console.log(errorMessage)
-    process.exit(1)
-  }
 }

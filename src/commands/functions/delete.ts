@@ -1,9 +1,9 @@
+import { HermesFunctionDatasource } from '@hermes-serverless/cli-resources'
 import { AxiosError } from 'axios'
 import chalk from 'chalk'
 import { CommanderStatic } from 'commander'
 import { isLogged } from '../../lib/utils/authUtils'
 import { Store } from '../../store'
-import { HermesFunctionDatasource } from './../../lib/datasources/HermesFunction'
 import { printFnTable } from './../../lib/utils/functionUtils'
 
 export const deleteCommand = (program: CommanderStatic) => {
@@ -22,6 +22,7 @@ export const deleteCommand = (program: CommanderStatic) => {
           console.log(chalk.bold(`-> No functions deleted`))
         } else {
           console.log(chalk.bold(`==== DELETED FUNCTIONS ====`))
+          // @ts-ignore
           printFnTable(deletedFunctions)
         }
       } catch (err) {

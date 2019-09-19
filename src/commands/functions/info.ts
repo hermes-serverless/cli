@@ -1,8 +1,8 @@
+import { HermesFunctionDatasource } from '@hermes-serverless/cli-resources'
 import { AxiosError } from 'axios'
 import { CommanderStatic } from 'commander'
 import { isLogged } from '../../lib/utils/authUtils'
 import { Store } from '../../store'
-import { HermesFunctionDatasource } from './../../lib/datasources/HermesFunction'
 import { printFnTable } from './../../lib/utils/functionUtils'
 
 export const infoCommand = (program: CommanderStatic) => {
@@ -17,6 +17,7 @@ export const infoCommand = (program: CommanderStatic) => {
           Store.getToken()
         )
 
+        // @ts-ignore
         printFnTable(functions)
       } catch (err) {
         const axiosErr: AxiosError = err
