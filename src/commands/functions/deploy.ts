@@ -2,6 +2,7 @@ import { Pusher } from '@hermes-serverless/cli-resources'
 import { CommanderStatic } from 'commander'
 import { guaranteeLogged } from '../../lib/utils/authUtils'
 import { getDockerhubUsername } from '../../lib/utils/functionUtils'
+import { Store } from '../../store'
 
 export const deployCommand = (program: CommanderStatic) => {
   program
@@ -10,10 +11,10 @@ export const deployCommand = (program: CommanderStatic) => {
     .action(async (dir, cmd) => {
       const fnDir = dir ? dir : process.cwd()
       const pusher = new Pusher(fnDir, await guaranteeLogged(), await getDockerhubUsername(), {
-        logger: console.log,
+        logger: console,
         outputToStdout: true,
       })
 
-      await pusher.addToHermes(cmd.update != null, 'production')
+      await pusher.addToHermes(cmd.update != null, Store.getToken(), 'production')
     })
 }

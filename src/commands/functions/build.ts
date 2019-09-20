@@ -7,7 +7,7 @@ export const functionBuildCommand = (program: CommanderStatic) => {
   program.command('build [dir]').action(async (dir, cmd) => {
     const fnDir = dir ? dir : process.cwd()
     const builder = new Builder(fnDir, await guaranteeLogged(), await getDockerhubUsername(), {
-      logger: console.log,
+      logger: console,
       outputToStdout: true,
     })
 
