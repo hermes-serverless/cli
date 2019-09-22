@@ -1,5 +1,4 @@
 import chalk from 'chalk'
-import { CommanderStatic } from 'commander'
 import R from 'ramda'
 import { Store } from '../store'
 import { configDockerhubUsername, configHermesURL } from './../lib/utils/configUtils'
@@ -28,20 +27,18 @@ const printConfigs = (obj: Configs) => {
   }, obj)
 }
 
-export const configCommand = (program: CommanderStatic) => {
-  program.command('config [property] [newValue]').action(async (property, newValue, cmd) => {
-    if (property != null) {
-      configs['docker.username']
-      if (configs[property as keyof typeof configs] == null) {
-        console.log(chalk.bold.red('Invalid property'))
-        process.exit(1)
-      }
+export default async (property?: string, newValue?: string) => {
+  if (property != null) {
+    configs['docker.username']
+    if (configs[property as keyof typeof configs] == null) {
+      console.log(chalk.bold.red('Invalid property'))
+      process.exit(1)
+    }
 
-      if (newValue != null) {
-        configs[property as keyof typeof configs].set(newValue)
-      }
+    if (newValue != null) {
+      configs[property as keyof typeof configs].set(newValue)
+    }
 
-      printConfigs({ [property]: configs[property as keyof typeof configs] })
-    } else printConfigs(configs)
-  })
+    printConfigs({ [property]: configs[property as keyof typeof configs] })
+  } else printConfigs(configs)
 }

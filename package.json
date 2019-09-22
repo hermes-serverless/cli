@@ -1,16 +1,15 @@
 {
   "name": "@hermes-serverless/cli",
   "version": "0.0.3",
-  "preferGlobal": true,
   "bin": {
-    "hermes": "./build/index.js"
+    "hermes": "./build/src/cli.js"
   },
   "files": [
     "build"
   ],
   "scripts": {
     "test": "jest",
-    "build": "rm -rf build && yarn tsc",
+    "build": "rm -rf build && yarn tsc && chmod +x ./build/src/cli.js",
     "prepare": "yarn build",
     "prepublishOnly": "yarn test && yarn lint",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
@@ -21,34 +20,30 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hermes-serverless/cli"
+    "url": "git+https://github.com/hermes-serverless/hermes"
   },
   "author": "Tiago Nápoli <napoli.tiago96@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hermes-serverless/cli/issues"
+    "url": "https://github.com/hermes-serverless/hermes/issues"
   },
-  "homepage": "https://github.com/hermes-serverless/cli#readme",
+  "homepage": "https://github.com/hermes-serverless/hermes#readme",
   "dependencies": {
     "@hermes-serverless/api-types-db-manager": "^0.0.3",
     "@hermes-serverless/cli-resources": "^0.0.12",
-    "axios": "^0.19.0",
+    "@hermes-serverless/custom-promises": "^0.1.0",
+    "@hermes-serverless/fs-utils": "^0.0.2",
     "chalk": "^2.4.2",
-    "commander": "^2.20.0",
     "configstore": "^4.0.0",
-    "form-data": "^2.4.0",
-    "get-stream": "^5.1.0",
+    "findhelp": "^1.1.0",
     "inquirer": "6.3.1",
     "moment": "^2.24.0",
     "ramda": "^0.26.1",
     "table": "^5.4.1"
   },
   "devDependencies": {
-    "@types/axios": "^0.14.0",
     "@types/chalk": "^2.2.0",
-    "@types/commander": "^2.12.2",
     "@types/configstore": "^4.0.0",
-    "@types/form-data": "^2.2.1",
     "@types/inquirer": "^6.0.3",
     "@types/jest": "^24.0.11",
     "@types/moment": "^2.13.0",
