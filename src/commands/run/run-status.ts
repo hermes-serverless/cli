@@ -9,7 +9,7 @@ export const runStatusCommand = (program: CommanderStatic) => {
     .option('-r, --result', 'Only run output')
     .action(async (runID, cmd) => {
       const username = await guaranteeLogged()
-      let status = await RunDatasource.getRunStatus(username, runID, Store.getToken(), [
+      const status = await RunDatasource.getRunStatus(username, runID, Store.getToken(), [
         'err',
         'out',
       ])
