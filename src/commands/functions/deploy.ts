@@ -1,7 +1,7 @@
 import { Pusher } from '@hermes-serverless/cli-resources'
 import { CommanderStatic } from 'commander'
 import { guaranteeLogged } from '../../lib/utils/authUtils'
-import { getDockerhubUsername } from '../../lib/utils/functionUtils'
+import { getDockerhubUsername, printFnTable } from '../../lib/utils/functionUtils'
 import { Store } from '../../store'
 
 export const deployCommand = (program: CommanderStatic) => {
@@ -15,6 +15,7 @@ export const deployCommand = (program: CommanderStatic) => {
         outputToStdout: true,
       })
 
-      await pusher.addToHermes(cmd.update != null, Store.getToken(), 'production')
+      const fn = await pusher.addToHermes(cmd.update != null, Store.getToken(), 'production')
+      printFnTable(fn)
     })
 }

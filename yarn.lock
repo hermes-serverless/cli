@@ -158,10 +158,10 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
-"@hermes-serverless/api-types-db-manager@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@hermes-serverless/api-types-db-manager/-/api-types-db-manager-0.0.2.tgz#7041f9e4d9cc14b0e1d527964c8d2c9d61ea4278"
-  integrity sha512-AS0cC4q5NEV1oZ6lI4jcLjRW40Eu8W9O3WyTVroTXbDJuLsejrTLxv9esBUsM+7u0/rYqZaMZCKNsszu7bmdCw==
+"@hermes-serverless/api-types-db-manager@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@hermes-serverless/api-types-db-manager/-/api-types-db-manager-0.0.3.tgz#d391759a328eac721c410feea25438b2195b7011"
+  integrity sha512-FGDS6uXIlUH4Z7BIkr56yy4f6B8AuLRj5l/ApYGzECezkGnPeFIVUCUdd0C5ZJiSs2xUz42xoseSpMnF6+oJsg==
   dependencies:
     "@types/node" "^12.6.9"
 
@@ -172,12 +172,12 @@
   dependencies:
     "@types/node" "^12.6.9"
 
-"@hermes-serverless/cli-resources@^0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@hermes-serverless/cli-resources/-/cli-resources-0.0.11.tgz#bf00a81f45c64028a64cf2f403d156fc5a4cf8f1"
-  integrity sha512-5fY8RmO1CDPTP7n39gjMaA48ockwZRigyOqYtTM29oufcievgdilS4t2L1OubXpj2ZrriGaqI89T4kDX0Tfo+Q==
+"@hermes-serverless/cli-resources@^0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@hermes-serverless/cli-resources/-/cli-resources-0.0.12.tgz#b77f057bafefdcc9e42834d7f9bd81f90ce2b007"
+  integrity sha512-zaiLgzLmeeB1ajdydmHEiHyob7guJS9WStXLFZDhcsvAdWBnfGNuJZ5f617SJN1KVqBHUvb5RC0FBJiTuMMHaA==
   dependencies:
-    "@hermes-serverless/api-types-db-manager" "^0.0.2"
+    "@hermes-serverless/api-types-db-manager" "^0.0.3"
     "@hermes-serverless/api-types-function-watcher" "^0.0.1"
     "@hermes-serverless/custom-promises" "^0.1.0"
     "@hermes-serverless/stream-utils" "^0.4.0"

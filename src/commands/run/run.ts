@@ -2,7 +2,6 @@ import { RunDatasource } from '@hermes-serverless/cli-resources'
 import chalk from 'chalk'
 import { CommanderStatic } from 'commander'
 import fs from 'fs'
-import getStream from 'get-stream'
 import inquirer from 'inquirer'
 import { guaranteeLogged } from '../../lib/utils/authUtils'
 import { Store } from '../../store'
@@ -66,7 +65,7 @@ export const runCommand = (program: CommanderStatic) => {
           input,
           Store.getToken()
         )
-        console.log(await getStream(outStream))
+        outStream.pipe(process.stdout)
       } else {
         const ret = await RunDatasource.createAsyncRun(
           username,
