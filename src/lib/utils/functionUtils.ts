@@ -3,8 +3,9 @@ import fs from 'fs'
 import path from 'path'
 import { table } from 'table'
 import { Store } from './../../store'
-import { HermesFunction, HermesFunctionProto } from './../../typings.d'
+import { HermesFunctionProto } from './../../typings.d'
 import { configDockerhubUsername } from './configUtils'
+import { FunctionData } from '@hermes-serverless/api-types-db-manager/function'
 
 export const parseHermesConfig = (dir: string): HermesFunctionProto => {
   const hermesPath = path.join(dir, 'hermes.config.json')
@@ -71,7 +72,7 @@ interface FunctionTableHeader {
   watcherImage?: string
 }
 
-export const printFnTable = (fnArr: HermesFunction[], header?: FunctionTableHeader) => {
+export const printFnTable = (fnArr: FunctionData[], header?: FunctionTableHeader) => {
   const tableData: any[] = []
 
   const resultHeader = {
