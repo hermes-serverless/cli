@@ -17,7 +17,6 @@ export default async (functionName: string, functionVersion: string) => {
       console.log(chalk.bold(`-> No functions deleted`))
     } else {
       console.log(chalk.bold(`==== DELETED FUNCTIONS ====`))
-      // @ts-ignore
       printFnTable(deletedFunctions)
     }
   } catch (err) {

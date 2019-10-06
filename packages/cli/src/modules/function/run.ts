@@ -3,7 +3,6 @@ import { createFsReadStream } from '@hermes-serverless/fs-utils'
 import chalk from 'chalk'
 import fs from 'fs'
 import inquirer from 'inquirer'
-import { PassThrough } from 'stream'
 import { guaranteeLogged } from '../../lib/utils/authUtils'
 import { Store } from '../../store'
 
@@ -52,19 +51,14 @@ export default async (functionIdString: string, opts: Arguments) => {
 
     input = await createFsReadStream(file, { encoding: 'utf-8' })
   } else {
-    if (async) {
-      const { input: stringInput } = await inquirer.prompt([
-        {
-          type: 'input',
-          name: 'input',
-          message: 'Input:',
-        },
-      ])
-      input = stringInput
-    } else {
-      input = new PassThrough()
-      process.stdin.pipe(input)
-    }
+    const { input: stringInput } = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'input',
+        message: 'Input:',
+      },
+    ])
+    input = stringInput
   }
 
   if (sync) {

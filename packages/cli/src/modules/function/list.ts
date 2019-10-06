@@ -1,4 +1,5 @@
 import { HermesFunctionDatasource } from '@hermes-serverless/cli-resources'
+import { inspect } from 'util'
 import { guaranteeLogged } from '../../lib/utils/authUtils'
 import { Store } from '../../store'
 import { printFnTable } from './../../lib/utils/functionUtils'
@@ -18,7 +19,6 @@ export default async (opts: Arguments) => {
   )
 
   if (pretty) {
-    // @ts-ignore
     printFnTable(fnArr)
-  } else console.log(fnArr.join('\n'))
+  } else console.log(fnArr.map(fn => inspect(fn)).join('\n\n'))
 }
