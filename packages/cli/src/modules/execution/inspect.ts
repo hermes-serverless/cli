@@ -10,10 +10,7 @@ interface Arguments {
 export default async (runID: string, opts: Arguments) => {
   const onlyResult = opts.r || opts.result || false
   const username = await guaranteeLogged()
-  const status = await RunDatasource.getRunStatus(username, runID, Store.getToken(), [
-    'out',
-    'err',
-  ])
+  const status = await RunDatasource.getRunStatus(username, runID, Store.getToken(), ['out', 'err'])
 
   if (status.out == null) {
     const res = await RunDatasource.getRunResultOutput(username, runID, Store.getToken())

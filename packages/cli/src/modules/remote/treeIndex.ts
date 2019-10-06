@@ -18,6 +18,6 @@ export default {
   },
   whoami: {
     description: "Check the user you're logged on",
-    handler: "./remote/whoami"
-  }
+    handler: './remote/whoami',
+  },
 }
