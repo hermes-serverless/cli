@@ -5,7 +5,7 @@
     "hermes": "./build/src/cli.js"
   },
   "files": [
-    "build"
+    "build/**/*"
   ],
   "scripts": {
     "test": "jest",
