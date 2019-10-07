@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "test": "jest",
-    "build": "rm -rf build && yarn tsc && chmod +x ./build/src/cli.js",
+    "build": "rm -rf build && yarn tsc && chmod +x ./build/cli.js",
     "prepare": "yarn build",
     "prepublishOnly": "yarn test && yarn lint",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
