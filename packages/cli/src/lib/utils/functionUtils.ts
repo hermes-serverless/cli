@@ -101,12 +101,7 @@ export const printFnTable = (fnArr: FunctionData[], header?: FunctionTableHeader
 
   sortedFnArr.forEach(fn => {
     const { functionName, functionVersion, language, gpuCapable, imageName } = fn
-    tableData.push([
-      `${functionName}:${functionVersion}`,
-      language,
-      gpuCapable,
-      imageName,
-    ])
+    tableData.push([`${functionName}:${functionVersion}`, language, gpuCapable, imageName])
   })
 
   console.log(table(tableData))
