@@ -18,7 +18,7 @@ const main = async () => {
   const command = await find(tree, args)
   const startTime = process.hrtime()
   await run.call(tree, command, join(__dirname, 'modules'))
-  console.debug(timeSpent(process.hrtime(startTime)))
+  process.stderr.write(timeSpent(process.hrtime(startTime)))
 }
 
 main().catch(err => {
