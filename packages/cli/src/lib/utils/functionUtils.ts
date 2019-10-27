@@ -18,7 +18,7 @@ export const parseHermesConfig = (dir: string): HermesFunctionProto => {
     fs.readFileSync(hermesPath, { encoding: 'utf-8' })
   )
 
-  const fields = ['functionName', 'functionVersion', 'gpuCapable', 'language', 'scope', 'handler']
+  const fields = ['functionName', 'functionVersion', 'gpuCapable', 'language', 'handler']
   const err: any[] = []
   fields.forEach((field: string) => {
     if (hermesConf[field as keyof typeof hermesConf] == null) {
@@ -78,7 +78,6 @@ export const printFnTable = (fnArr: FunctionData[], header?: FunctionTableHeader
   const resultHeader = {
     functionName: 'Function',
     language: 'Language',
-    scope: 'Scope',
     gpuCapable: 'GPU Capable',
     watcherImage: 'Watcher Image',
     ...header,
@@ -88,7 +87,6 @@ export const printFnTable = (fnArr: FunctionData[], header?: FunctionTableHeader
     [
       resultHeader.functionName,
       resultHeader.language,
-      resultHeader.scope,
       resultHeader.gpuCapable,
       resultHeader.watcherImage,
     ].map(str => {
@@ -102,11 +100,10 @@ export const printFnTable = (fnArr: FunctionData[], header?: FunctionTableHeader
   })
 
   sortedFnArr.forEach(fn => {
-    const { functionName, functionVersion, language, scope, gpuCapable, imageName } = fn
+    const { functionName, functionVersion, language, gpuCapable, imageName } = fn
     tableData.push([
       `${functionName}:${functionVersion}`,
       language,
-      scope.toUpperCase(),
       gpuCapable,
       imageName,
     ])
