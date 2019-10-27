@@ -99,5 +99,7 @@ export default async (opts: Arguments) => {
   fs.mkdirSync(dir)
   fs.writeFileSync(path.join(dir, 'hermes.config.json'), json, { encoding: 'utf-8' })
   fs.writeFileSync(path.join(dir, 'Makefile'), makefiles[language], { encoding: 'utf-8' })
-  fs.writeFileSync(path.join(dir, `main.${languageExtension[language]}`), basicSrc[language], { encoding: 'utf-8' })
+  fs.writeFileSync(path.join(dir, `main.${languageExtension[language]}`), basicSrc[language], {
+    encoding: 'utf-8',
+  })
 }
