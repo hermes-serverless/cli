@@ -12,6 +12,45 @@ const getLanguageOptions = () => {
   return ['cuda', 'cpp']
 }
 
+const languageExtension = {
+  cpp: 'cpp',
+  cuda: 'cu',
+}
+
+const makefiles = {
+  cpp: `main: main.cpp
+  g++ main.cpp -o a.out
+
+clean:
+  -rm a.out
+`,
+  cuda: `main: main.cu
+  nvcc -std=c++11 main.cu
+
+clean:
+  -rm a.out
+`,
+}
+
+const basicSrc = {
+  cpp: `#include <stdio.h>
+
+int main() {
+    
+  return 0;
+}
+  
+`,
+  cuda: `#include <stdio.h>
+
+int main() {
+    
+  return 0;
+}
+  
+`,
+}
+
 const validateFunctionName = (fName: string) => {
   if (!fName) return "Username can't be empty"
   if (!/^[a-zA-Z0-9_\-]*$/i.test(fName)) return 'Use only letters, numbers, underline and hyphens'
@@ -59,4 +98,6 @@ export default async (opts: Arguments) => {
   if (fs.existsSync(dir)) throw new Error(`Function directory ${functionName} already exists`)
   fs.mkdirSync(dir)
   fs.writeFileSync(path.join(dir, 'hermes.config.json'), json, { encoding: 'utf-8' })
+  fs.writeFileSync(path.join(dir, 'Makefile'), makefiles[language], { encoding: 'utf-8' })
+  fs.writeFileSync(path.join(dir, `main.${languageExtension[language]}`), basicSrc[language], { encoding: 'utf-8' })
 }
