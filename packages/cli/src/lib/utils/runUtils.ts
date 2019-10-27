@@ -20,7 +20,7 @@ export const printRunTable = (runArr: CompleteRunInfo[], header?: RunTableHeader
   const runs = runArr.map(el => {
     const fn = el.function
     const owner = fn.owner.username
-    const startTime = moment(el.startTime)
+    const startTime = el.startTime ? moment(el.startTime) : null
     const endTime = el.endTime ? moment(el.endTime) : null
     const elapsedTime = el.endTime ? timeDiff(startTime, endTime) : null
 
@@ -67,7 +67,7 @@ export const printRunTable = (runArr: CompleteRunInfo[], header?: RunTableHeader
     tableData.push([
       id,
       status,
-      startTime.format(dateFormat),
+      startTime ? startTime.format(dateFormat) : '----- --:--:--.---',
       endTime ? endTime.format(dateFormat) : '----- --:--:--.---',
       elapsedTime ? elapsedTime : '----- --:--:--.---',
       fn,
