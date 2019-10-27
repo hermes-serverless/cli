@@ -12,7 +12,7 @@ export default {
     ],
   },
   inspect: {
-    description: 'Get info on a execution',
+    description: 'Get info on an execution',
     handler: './execution/inspect',
     requiredArgs: 'runID',
     options: [
