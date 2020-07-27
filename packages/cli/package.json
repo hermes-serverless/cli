@@ -85,5 +85,6 @@
         "description": "Executions related commands. Run 'hermes execution' to see all subcommands"
       }
     }
-  }
+  },
+  "gitHead": "c904835a58d0e10f5093e293975a0408e50d3bb9"
 }
