@@ -27,7 +27,7 @@ export const parseHermesConfig = (dir: string): HermesFunctionProto => {
   })
 
   if (err.length !== 0) {
-    err.forEach(msg => console.log(msg))
+    err.forEach((msg) => console.log(msg))
     process.exit(1)
   }
 
@@ -89,7 +89,7 @@ export const printFnTable = (fnArr: FunctionData[], header?: FunctionTableHeader
       resultHeader.language,
       resultHeader.gpuCapable,
       resultHeader.watcherImage,
-    ].map(str => {
+    ].map((str) => {
       return chalk.bold(str)
     })
   )
@@ -99,7 +99,7 @@ export const printFnTable = (fnArr: FunctionData[], header?: FunctionTableHeader
     return a.functionName < b.functionName ? -1 : 1
   })
 
-  sortedFnArr.forEach(fn => {
+  sortedFnArr.forEach((fn) => {
     const { functionName, functionVersion, language, gpuCapable, imageName } = fn
     tableData.push([`${functionName}:${functionVersion}`, language, gpuCapable, imageName])
   })

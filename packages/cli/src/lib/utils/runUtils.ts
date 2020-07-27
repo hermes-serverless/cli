@@ -17,7 +17,7 @@ export const printRunTable = (runArr: CompleteRunInfo[], header?: RunTableHeader
   const tableData: any[] = []
   const dateFormat = 'MM/DD HH:mm:ss.SSS'
 
-  const runs = runArr.map(el => {
+  const runs = runArr.map((el) => {
     const fn = el.function
     const owner = fn.owner.username
     const startTime = el.startTime ? moment(el.startTime) : null
@@ -57,12 +57,12 @@ export const printRunTable = (runArr: CompleteRunInfo[], header?: RunTableHeader
   const { id, status, startTime, endTime, elapsedTime } = resultHeader
 
   tableData.push(
-    [id, status, startTime, endTime, elapsedTime, resultHeader.function].map(str => {
+    [id, status, startTime, endTime, elapsedTime, resultHeader.function].map((str) => {
       return chalk.bold(str)
     })
   )
 
-  runsSorted.forEach(run => {
+  runsSorted.forEach((run) => {
     const { id, status, startTime, endTime, elapsedTime, function: fn } = run
     tableData.push([
       id,

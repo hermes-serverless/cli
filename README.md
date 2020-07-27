@@ -19,13 +19,13 @@ To install docker refer to: `https://docs.docker.com/install/`.
 After installing `docker`, you can run the following to install `hermes-cli`:
 
 ```bash
-npm install -g hermes-cli
+npm install -g @hermes-serverless/cli
 ```
 
 Or, if you are using `yarn`:
 
 ```bash
-yarn global add hermes-cli
+yarn global add @hermes-serverless/cli
 ```
 
 Make sure npm's or yarn's binaries path are in your system's environment variable PATH. After this you can run:
