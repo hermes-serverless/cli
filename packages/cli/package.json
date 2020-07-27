@@ -9,6 +9,12 @@
     "/bin",
     "/oclif.manifest.json"
   ],
+  "keywords": [
+    "nvidia",
+    "gpu",
+    "serverless",
+    "faas"
+  ],
   "scripts": {
     "test": "jest",
     "build-clean": "rm -rf build",
