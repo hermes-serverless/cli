@@ -1,7 +1,9 @@
 {
   "name": "@hermes-serverless/cli",
   "version": "0.2.0",
-  "bin": "bin/run",
+  "bin": {
+    "hermes": "bin/run"
+  },
   "files": [
     "/build",
     "/bin",

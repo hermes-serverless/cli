@@ -25,7 +25,7 @@ EXAMPLE
   hermes login tiagonapoli
 ```
 
-_See code: [build/commands/remote/login.ts](https://github.com/hermes-serverless/hermes/blob/v0.1.8/build/commands/remote/login.ts)_
+_See code: [build/commands/remote/login.ts](https://github.com/hermes-serverless/hermes/blob/v0.2.0/build/commands/remote/login.ts)_
 
 ## `hermes remote:logout`
 
@@ -40,7 +40,7 @@ OPTIONS
   -v, --verbose  Show debug level logs
 ```
 
-_See code: [build/commands/remote/logout.ts](https://github.com/hermes-serverless/hermes/blob/v0.1.8/build/commands/remote/logout.ts)_
+_See code: [build/commands/remote/logout.ts](https://github.com/hermes-serverless/hermes/blob/v0.2.0/build/commands/remote/logout.ts)_
 
 ## `hermes remote:register`
 
@@ -55,7 +55,7 @@ OPTIONS
   -v, --verbose  Show debug level logs
 ```
 
-_See code: [build/commands/remote/register.ts](https://github.com/hermes-serverless/hermes/blob/v0.1.8/build/commands/remote/register.ts)_
+_See code: [build/commands/remote/register.ts](https://github.com/hermes-serverless/hermes/blob/v0.2.0/build/commands/remote/register.ts)_
 
 ## `hermes remote:unregister`
 
@@ -70,7 +70,7 @@ OPTIONS
   -v, --verbose  Show debug level logs
 ```
 
-_See code: [build/commands/remote/unregister.ts](https://github.com/hermes-serverless/hermes/blob/v0.1.8/build/commands/remote/unregister.ts)_
+_See code: [build/commands/remote/unregister.ts](https://github.com/hermes-serverless/hermes/blob/v0.2.0/build/commands/remote/unregister.ts)_
 
 ## `hermes remote:whoami`
 
@@ -85,4 +85,4 @@ OPTIONS
   -v, --verbose  Show debug level logs
 ```
 
-_See code: [build/commands/remote/whoami.ts](https://github.com/hermes-serverless/hermes/blob/v0.1.8/build/commands/remote/whoami.ts)_
+_See code: [build/commands/remote/whoami.ts](https://github.com/hermes-serverless/hermes/blob/v0.2.0/build/commands/remote/whoami.ts)_
