@@ -52,7 +52,7 @@ $ hermes config docker.username <yourDockerhubUsername>
 
 The last setup step to start using hermes is setting the url of a remote hermes instance to be used, for example:
 
-```
+```bash
 $ hermes config hermes.url http://ratel.ime.usp.br:9090
 ```
 

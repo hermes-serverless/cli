@@ -6,7 +6,7 @@ Hermes-functions related commands. Run 'hermes function' to see all subcommands
 * [`hermes function:build`](#hermes-functionbuild)
 * [`hermes function:delete [FUNCTIONNAME] [FUNCTIONVERSION]`](#hermes-functiondelete-functionname-functionversion)
 * [`hermes function:deploy`](#hermes-functiondeploy)
-* [`hermes function:init`](#hermes-functioninit)
+* [`hermes function:init [PATH]`](#hermes-functioninit-path)
 * [`hermes function:list`](#hermes-functionlist)
 * [`hermes function:run [FUNCTIONID]`](#hermes-functionrun-functionid)
 
@@ -24,7 +24,7 @@ OPTIONS
   -v, --verbose  Show debug level logs
 ```
 
-_See code: [build/commands/function/build.ts](https://github.com/hermes-serverless/hermes/blob/v0.1.8/build/commands/function/build.ts)_
+_See code: [build/commands/function/build.ts](https://github.com/hermes-serverless/hermes/blob/v0.2.0/build/commands/function/build.ts)_
 
 ## `hermes function:delete [FUNCTIONNAME] [FUNCTIONVERSION]`
 
@@ -42,7 +42,7 @@ EXAMPLE
   hermes function:delete gpu-pi-montecarlo 1.0.0
 ```
 
-_See code: [build/commands/function/delete.ts](https://github.com/hermes-serverless/hermes/blob/v0.1.8/build/commands/function/delete.ts)_
+_See code: [build/commands/function/delete.ts](https://github.com/hermes-serverless/hermes/blob/v0.2.0/build/commands/function/delete.ts)_
 
 ## `hermes function:deploy`
 
@@ -58,27 +58,26 @@ OPTIONS
   -v, --verbose  Show debug level logs
 ```
 
-_See code: [build/commands/function/deploy.ts](https://github.com/hermes-serverless/hermes/blob/v0.1.8/build/commands/function/deploy.ts)_
+_See code: [build/commands/function/deploy.ts](https://github.com/hermes-serverless/hermes/blob/v0.2.0/build/commands/function/deploy.ts)_
 
-## `hermes function:init`
+## `hermes function:init [PATH]`
 
 Init a hermes-function
 
 ```
 USAGE
-  $ hermes function:init
+  $ hermes function:init [PATH]
 
 OPTIONS
-  -h, --help       show CLI help
-  -p, --path=path  [default: .] Path to create hermes-function folder
-  -v, --verbose    Show debug level logs
+  -h, --help     show CLI help
+  -v, --verbose  Show debug level logs
 
 EXAMPLES
   hermes function:init
-  hermes function:init -p ./dir/to/create/hermes-function
+  hermes function:init ./dir/to/create/hermes-function
 ```
 
-_See code: [build/commands/function/init.ts](https://github.com/hermes-serverless/hermes/blob/v0.1.8/build/commands/function/init.ts)_
+_See code: [build/commands/function/init.ts](https://github.com/hermes-serverless/hermes/blob/v0.2.0/build/commands/function/init.ts)_
 
 ## `hermes function:list`
 
@@ -98,7 +97,7 @@ EXAMPLES
   hermes function:list --json
 ```
 
-_See code: [build/commands/function/list.ts](https://github.com/hermes-serverless/hermes/blob/v0.1.8/build/commands/function/list.ts)_
+_See code: [build/commands/function/list.ts](https://github.com/hermes-serverless/hermes/blob/v0.2.0/build/commands/function/list.ts)_
 
 ## `hermes function:run [FUNCTIONID]`
 
@@ -112,7 +111,6 @@ OPTIONS
   -a, --async      Run hermes-function asynchronously
   -f, --file=file  Path to an input file
   -h, --help       show CLI help
-  -s, --sync       Run hermes-function synchronously
   -v, --verbose    Show debug level logs
 
 EXAMPLES
@@ -122,4 +120,4 @@ EXAMPLES
   hermes function:run username/function-name:1.0.0 --file ./path/to/input
 ```
 
-_See code: [build/commands/function/run.ts](https://github.com/hermes-serverless/hermes/blob/v0.1.8/build/commands/function/run.ts)_
+_See code: [build/commands/function/run.ts](https://github.com/hermes-serverless/hermes/blob/v0.2.0/build/commands/function/run.ts)_

@@ -23,4 +23,4 @@ EXAMPLES
   hermes config docker.username tiagonapoli
 ```
 
-_See code: [build/commands/config.ts](https://github.com/hermes-serverless/hermes/blob/v0.1.8/build/commands/config.ts)_
+_See code: [build/commands/config.ts](https://github.com/hermes-serverless/hermes/blob/v0.2.0/build/commands/config.ts)_

@@ -24,7 +24,7 @@ EXAMPLES
   hermes execution:inspect 15 --result
 ```
 
-_See code: [build/commands/execution/inspect.ts](https://github.com/hermes-serverless/hermes/blob/v0.1.8/build/commands/execution/inspect.ts)_
+_See code: [build/commands/execution/inspect.ts](https://github.com/hermes-serverless/hermes/blob/v0.2.0/build/commands/execution/inspect.ts)_
 
 ## `hermes execution:list`
 
@@ -44,4 +44,4 @@ EXAMPLES
   hermes execution:list --json
 ```
 
-_See code: [build/commands/execution/list.ts](https://github.com/hermes-serverless/hermes/blob/v0.1.8/build/commands/execution/list.ts)_
+_See code: [build/commands/execution/list.ts](https://github.com/hermes-serverless/hermes/blob/v0.2.0/build/commands/execution/list.ts)_
