@@ -1,5 +1,0 @@
-main: main.cu
-	nvcc -std=c++11 main.cu
-
-clean:
-	-rm a.out

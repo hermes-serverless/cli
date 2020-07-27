@@ -1,4 +1,5 @@
 build
 node_modules
+oclif.manifest.json
 *.log
 .vscode

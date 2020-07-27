@@ -19,19 +19,19 @@ To install docker refer to: `https://docs.docker.com/install/`.
 After installing `docker`, you can run the following to install `hermes-cli`:
 
 ```bash
-npm install -g @hermes-serverless/cli
+$ npm install -g @hermes-serverless/cli
 ```
 
 Or, if you are using `yarn`:
 
 ```bash
-yarn global add @hermes-serverless/cli
+$ yarn global add @hermes-serverless/cli
 ```
 
 Make sure npm's or yarn's binaries path are in your system's environment variable PATH. After this you can run:
 
 ```bash
-  hermes
+$ hermes
 ```
 
 And the output should be all commands available to use.
@@ -41,48 +41,57 @@ And the output should be all commands available to use.
 In order to use Hermes you'll have to own a Dockerhub account (https://hub.docker.com/). If you don't have one already, create one, it's simple and free. After that, you'll have to login to your account using `docker`, simply run:
 
 ```bash
-  docker login
+$ docker login
 ```
 
-Now you can setup `hermes` for usage:
+Now you can setup `hermes` for using this Docker username:
 
 ```bash
-  hermes config dockerhub.username <yourDockerhubUsername>
+$ hermes config docker.username <yourDockerhubUsername>
 ```
 
-After that, if you don't have an account on hermes, you can create one:
+The last setup step to start using hermes is setting the url of a remote hermes instance to be used, for example:
 
-```bash
-  hermes register
+```
+$ hermes config hermes.url http://ratel.ime.usp.br:9090
 ```
 
-Or login:
+If you want you can run a hermes instance locally or in a server by following the instructions in [this](https://github.com/hermes-serverless/hermes-install) repository.
+
+After that it's time to login into that instance. If you don't have an account there, you can create one:
 
 ```bash
-  hermes login <username>
+$ hermes remote:register
 ```
 
-You can make sure you're logged in running:
+Or login into an existent account:
 
 ```bash
-  hermes me
+$ hermes remote:login <username>
+```
+
+You check your credentials at any time by running:
+
+```bash
+$ hermes remote:whoami
 ```
 
 ### Deploying your first function
 
-Some function examples are available on [Hermes-Examples](https://github.com/hermes-tcc/examples). We're going to deploy function `pi-montecarlo`, which calculates PI using Montecarlo's method. First clone [Hermes-Examples](https://github.com/hermes-tcc/examples) repository:
+Some function examples are available on [Hermes-Examples](https://github.com/hermes-serverless/examples). We're going to deploy function `gpu-pi-montecarlo`, which calculates PI using the Montecarlo's method sending the workload to the GPU. First clone [Hermes-Examples](https://github.com/hermes-serverless/examples) repository:
 
 ```bash
-  git clone https://github.com/hermes-tcc/examples.git
+$ git clone https://github.com/hermes-serverless/examples.git
 ```
 
 Now you can deploy the function using:
 
 ```bash
-  hermes deploy ./examples/cpp/pi-montecarlo
+$ cd ./examples/cuda/gpu-pi-montecarlo
+$ hermes function:deploy
 ```
 
-The function will be built and after successfuly deploying it on hermes you should expect something like this:
+The function will be built and after successfuly deploying it on hermes you should expect the output to be somehting like this:
 
 ```bash
 ===== FUNCTION DEPLOYED ======
@@ -93,36 +102,94 @@ The function will be built and after successfuly deploying it on hermes you shou
 ╚═════════════════════╧══════════╧════════╧═════════════╧═════════════════════════════════════════╝
 ```
 
-Now you can start a run using:
+Now you can request a synchronous execution using:
 
 ```bash
-  hermes run <yourHermesUsername>/pi-montecarlo:1.0.0
+$ hermes function:run <yourHermesUsername>/gpu-pi-montecarlo:1.0.0 --sync
 ```
 
-A prompt for the input should appear. This function expects two integers, the first one is the number of iterations, the second the number of threads. In this example the input was:
+A prompt for the input should appear. This function expects one integers - the number of iterations of the Montecarlo's algorithm, for example:
 
 ```bash
-  ? Input: 10000000 4
+  ? Input: 1000000000
 ```
 
-You'll receive something like this:
+You'll receive something like this, which is the function output:
 
 ```bash
-{ startTime: '2019-07-07T16:50:25.174Z', runID: '13' }
+------CUDA Devices------
+Device Number: 0
+  Device name: GeForce MX150
+  Memory Clock Rate (KHz): 3004000
+
+Starting simulation with 64 blocks, 32 threads per block (warps), and a total of 1000001536 iterations
+Approximated PI using 1000001536 random tests
+PI ~= 3.141620254
 ```
 
-Now, to check the status of this run:
+This function just prints some information on the Hermes instance GPU and then approximates PI.
+
+You can create async executions too, which are fire-and-forget executions:
+
+```
+$ hermes function:run <yourHermesUsername>/gpu-pi-montecarlo:1.0.0 --async
+? Input: 100000000
+{ startTime: '2020-07-27T02:49:33.576Z', runID: '3' }
+```
+
+You received an `runID` which can be used to inspect the execution:
 
 ```bash
-hermes run-status <runID>
+$ hermes execution:inspect <runID>
 ```
 
 The output will be similar to:
 
 ```bash
-out:
-Elapsed time: 70.270796000000 ms
-PI: 3.143152000000
+{
+  status: 'success',
+  startTime: '2020-07-27T02:49:33.576Z',
+  runningTime: '00:00:00.615',
+  endTime: '2020-07-27T02:49:34.191Z',
+  out: '------CUDA Devices------\n' +
+    'Device Number: 0\n' +
+    '  Device name: GeForce MX150\n' +
+    '  Memory Clock Rate (KHz): 3004000\n' +
+    '\n' +
+    'Starting simulation with 64 blocks, 32 threads per block (warps), and a total of 100001792 iterations\n' +
+    'Approximated PI using 100001792 random tests\n' +
+    'PI ~= 3.141545224\n'
+}
+```
+
+Your previous sync or async executions can be listed and checked again at any time:
+
+```bash
+$ hermes execution:list
+╔═══════╤═════════╤════════════════════╤════════════════════╤══════════════╤═════════════════════════════════════╗
+║ RunID │ Status  │ Start              │ End                │ Elapsed      │ Function                            ║
+╟───────┼─────────┼────────────────────┼────────────────────┼──────────────┼─────────────────────────────────────╢
+║ 1     │ success │ 07/26 23:45:14.822 │ 07/26 23:45:15.710 │ 00:00:00.888 │ tiagonapoli/gpu-pi-montecarlo:1.0.0 ║
+╟───────┼─────────┼────────────────────┼────────────────────┼──────────────┼─────────────────────────────────────╢
+║ 2     │ success │ 07/26 23:45:23.978 │ 07/26 23:45:24.760 │ 00:00:00.782 │ tiagonapoli/gpu-pi-montecarlo:1.0.0 ║
+╟───────┼─────────┼────────────────────┼────────────────────┼──────────────┼─────────────────────────────────────╢
+║ 3     │ success │ 07/26 23:49:33.576 │ 07/26 23:49:34.191 │ 00:00:00.615 │ tiagonapoli/gpu-pi-montecarlo:1.0.0 ║
+╚═══════╧═════════╧════════════════════╧════════════════════╧══════════════╧═════════════════════════════════════╝
+$ hermes execution:inspect 1
+{
+  status: 'success',
+  startTime: '2020-07-27T02:45:14.822Z',
+  runningTime: '00:00:00.888',
+  endTime: '2020-07-27T02:45:15.710Z',
+  out: '------CUDA Devices------\n' +
+    'Device Number: 0\n' +
+    '  Device name: GeForce MX150\n' +
+    '  Memory Clock Rate (KHz): 3004000\n' +
+    '\n' +
+    'Starting simulation with 64 blocks, 32 threads per block (warps), and a total of 1000001536 iterations\n' +
+    'Approximated PI using 1000001536 random tests\n' +
+    'PI ~= 3.141579903\n'
+}
 ```
 
 ### Creating your first function
@@ -130,7 +197,7 @@ PI: 3.143152000000
 To create a function you can use:
 
 ```bash
-  hermes init <path>
+$ hermes function:init [path]
 ```
 
 After answering some prompts, a folder with your function name will be availabe in the given path. Inside it you'll find `hermes.config.json`. This file is responsible for the project configuration, and it has a structure like this one:
@@ -158,37 +225,18 @@ clean:
 	-rm main.out
 ```
 
-The instruction for creating the handler should be available through `main` recipe. You'll have to create a `clean` recipe too, and make sure it removes _all_ binaries and object files. If you don't do this, a object file may be copied from your system to the function container built and after the compilation inside the container some libraries incompatibilities may occur.
+The instruction for creating the handler should be available through the `main` recipe. You'll have to create a `clean` recipe too, and make sure it removes _all_ binaries and object files. If you don't do this, a object file may be copied from your system to the function container built and after the compilation inside the container some libraries incompatibilities may occur.
 
 Make sure to insert a `-` before the `rm` command. If the files to be removed doesn't exist, the `clean` recipe will not fail.
 
 After creating the Makefile for your project you can try to build it using:
 
 ```bash
-  hermes build .
+$ hermes function:build
 ```
 
 If there were no errors in the compilation, you can deploy your function using the instructions from the previous section.
 
 ## Commands <a name="usage"></a>
 
-The commands availabe are the following (for every command you can use `--help` or `-h` to check the available options):
-
-| Command                                                         | Description                                                                                                                                                                                                                                                                                                                                                                       |
-| --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `register`                                                      | Create a username in Hermes server.                                                                                                                                                                                                                                                                                                                                               |
-| `unregister`                                                    | Delete the logged account.                                                                                                                                                                                                                                                                                                                                                        |
-| `login [options] <username>`                                    | Login to an existing account.                                                                                                                                                                                                                                                                                                                                                     |
-| `logout`                                                        | Logout.                                                                                                                                                                                                                                                                                                                                                                           |
-| `me`                                                            | Check the account logged.                                                                                                                                                                                                                                                                                                                                                         |
-| `config [property][newvalue]`                                   | If no property and newValue are specified, all configurations are printed. If only a property is specified, its value is printed. If a property and a value are specified the property will have this new value.                                                                                                                                                                  |
-| `init [path]`                                                   | Create a new project at the specified path. If no path is provided the project will be created in the current dir.                                                                                                                                                                                                                                                                |
-| `build [dir]`                                                   | Build a project specified by dir.                                                                                                                                                                                                                                                                                                                                                 |
-| `deploy [options][dir]`                                         | Deploy a project specified by dir. Use `-u` or `--update` to change the current version.                                                                                                                                                                                                                                                                                          |
-| `delete <functionName> [functionVersion]`                       | Delete a function deployed.                                                                                                                                                                                                                                                                                                                                                       |
-| `info <functionName> [functionVersion]`                         | Get information about a function. If no version is specified, all functions with that name will be presented.                                                                                                                                                                                                                                                                     |
-| `list`                                                          | List all functions deployed.                                                                                                                                                                                                                                                                                                                                                      |
-| `run [options] <functionOwner/fName:fVersion>`                  | Start a run. Use `-f` to specify a file to use as input.                                                                                                                                                                                                                                                                                                                          |
-| `function-runs <functionOwner> [functionName][functionversion]` | Check all runs of a function. If no function name or version are specified, all runs referring to that functionOwner will be presented. If a function name is specified, all runs referring `<functionOwner>/<functionName>` will be presented. Finally, if functionVersion is specified, all runs referring to `<functionOwner>/<functionName>:<functionVersion>` will be shown. |
-| `runs [runId]`                                                  | Check all runs done. If `runID` is given, that run info is shown.                                                                                                                                                                                                                                                                                                                 |
-| `run-status <runID>`                                            | Check the status run with id `runID`.                                                                                                                                                                                                                                                                                                                                             |
+All commands usage are documented [here](https://github.com/hermes-serverless/hermes/tree/master/packages/cli/docs), make sure to check it out. Also every command has a `--help` flag showing its usage.
